@@ -28,9 +28,9 @@ library(lubridate)
 ## Problem 1
 ```{r}
 # load Mr. Trash data
-MrTrash <- read_excel("/Users/vicky/Desktop/2021 fall/HBDS5018 DataScience/datachallenge/DSI_DataChallenge2/DSI_DataChallenge2/data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 'Mr. Trash Wheel')
+mr_trash <- read_excel("E:/data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 'Mr. Trash Wheel')
 
-MrTrash <- MrTrash %>%
+mr_trash <- mr_trash %>%
   clean_names() %>%  # clean the column names
   drop_na(dumpster) %>% # omit rows that do not include dumpster-specific data
   mutate(wheel = 'Mr. Trash Wheel') %>% # create a wheel variable
@@ -40,9 +40,9 @@ MrTrash <- MrTrash %>%
 
 ```{r}
 # load Professor Trash data
-ProfTrash <- read_excel("/Users/vicky/Desktop/2021 fall/HBDS5018 DataScience/datachallenge/DSI_DataChallenge2/DSI_DataChallenge2/data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 'Professor Trash Wheel')
+prof_trash <- read_excel("E:/data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 'Professor Trash Wheel')
 
-ProfTrash <- ProfTrash %>%
+prof_trash <- prof_trash %>%
   clean_names() %>%  # clean the column names
   drop_na(dumpster) %>% # omit rows that do not include dumpster-specific data
   mutate(wheel = 'Professor Trash Wheel') # create a wheel variable 
@@ -50,9 +50,9 @@ ProfTrash <- ProfTrash %>%
 
 ```{r}
 # load Captain Trash data
-CapTrash <- read_excel("/Users/vicky/Desktop/2021 fall/HBDS5018 DataScience/datachallenge/DSI_DataChallenge2/DSI_DataChallenge2/data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 'Captain Trash Wheel')
+cap_trash <- read_excel("E:/data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 'Captain Trash Wheel')
 
-CapTrash <- CapTrash %>%
+cap_trash <- cap_trash %>%
   clean_names() %>%  # clean the column names
   drop_na(dumpster) %>% # omit rows that do not include dumpster-specific data
   mutate(wheel = 'Captain Trash Wheel') # create a wheel variable 
@@ -60,7 +60,7 @@ CapTrash <- CapTrash %>%
 
 ```{r}
 # bind the three data frames
-all_trash_wheels <- bind_rows(MrTrash, ProfTrash, CapTrash) %>% 
+all_trash_wheels <- bind_rows(mr_trash, prof_trash, cap_trash) %>% 
   pivot_longer(cols = c('plastic_bottles', 'polystyrene', 'cigarette_butts', 
                         'glass_bottles', 'grocery_bags', 'chip_bags', 
                         'sports_balls', 'homes_powered', 'plastic_bags'), # pivot to long format
@@ -92,8 +92,8 @@ ggplot(data = all_trash_wheels_totals_June_2018,
 ## Problem 2
 ```{r}
 # load data
-snp <- read_csv('/Users/vicky/Desktop/2021 fall/HBDS5018 DataScience/datachallenge/DSI_DataChallenge2/DSI_DataChallenge2/data/snp.csv')
-unemployment <- read_csv('/Users/vicky/Desktop/2021 fall/HBDS5018 DataScience/datachallenge/DSI_DataChallenge2/DSI_DataChallenge2/data/unemployment.csv')
+snp <- read_csv('E:/data/snp.csv')
+unemployment <- read_csv('E:/data/unemployment.csv')
 
 # data wrangling with snp
 snp$date <- mdy(snp$date)  # convert the date to a date object
@@ -157,5 +157,4 @@ ggplot(data = avg_snp_unemployment,
 
 From the graph in problem 2, we can see the S&P closing price increase all the way from 1950 to 2000 and have several up and downs between 2000 and 2010, then continue increase until 2015. The unemplyment rate, on the other hand, experienced largr fluctuations during those years. Unemployment rate reached the highest around 1983 and the second highest at 2010, the lowest unemplyment rate was at 2000. 
 From graph in problem 3 focuing on 2000 to 2015, S&P closing price decrease from 2000 to 2008 and started to increase until 2015. The unemployment rate increase from 2000 to 2010 and decrease since then. 
-
 
